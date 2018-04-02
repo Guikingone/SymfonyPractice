@@ -4,4 +4,40 @@
 
 {% block body %}
     <h1>Hello World !</h1>
+    {{ form_start(form) }}
+    {{ form_label(form.content) }}
+    {{ form_widget(form.content) }}
+    {{ form_row(form.images) }}
+    <button type="button" id="add_file">Add a new File</button>
+    {{ form_end(form) }}
 {% endblock body %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        var form = document.querySelector('div#article_images');
+        var formCount = form.children.length;
+        console.info(form);
+
+        var button = document.querySelector('button#add_file');
+
+        button.addEventListener('click', function () {
+            add()
+        });
+
+        if (formCount === 0) {
+            add();
+        }
+
+        function add() {
+            var prototype = form.getAttribute('data-prototype');
+            var template = prototype.replace(/__name__label__/, 'New file')
+                                    .replace(/__name__/, formCount);
+
+            console.info(template);
+
+            form.innerHTML += template;
+
+            formCount++;
+        }
+    </script>
+{% endblock %}
