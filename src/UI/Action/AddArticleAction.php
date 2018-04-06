@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace App\UI\Action;
 
-
-use App\Form\Type\ArticleType;
 use App\UI\Responder\AddArticleResponder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,12 +37,6 @@ class AddArticleAction
 
     public function __invoke(Request $request, AddArticleResponder $responder)
     {
-        $addArticleType = $this->formFactory->create(ArticleType::class)->handleRequest($request);
 
-        if ($addArticleType->isSubmitted() && $addArticleType->isValid()) {
-
-        }
-
-        return $responder($addArticleType);
     }
 }

@@ -11,13 +11,16 @@ declare(strict_types=1);
 
 namespace App\UI\Action;
 
-use App\Domain\Models\User;
-use App\Event\CoucouEvent;
-use App\Event\UserCreatedEvent;
+use App\Domain\DTO\NewArticleDTO;
+use App\Form\Handler\Interfaces\AddArticleTypeHandlerInterface;
+use App\Form\Type\AddArticleType;
 use App\Helper\FileUploaderHelper;
 use App\UI\Action\Interfaces\HomeActionInterface;
 use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,6 +33,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeAction implements HomeActionInterface
 {
     /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+    /**
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
@@ -40,29 +48,41 @@ class HomeAction implements HomeActionInterface
     private $fileUploaderHelper;
 
     /**
+     * @var AddArticleTypeHandlerInterface
+     */
+    private $addArticleTypeHandler;
+
+    /**
      * HomeAction constructor.
      *
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param FileUploaderHelper $fileUploaderHelper
+     * @param FormFactoryInterface            $formFactory
+     * @param EventDispatcherInterface        $eventDispatcher
+     * @param FileUploaderHelper              $fileUploaderHelper
+     * @param AddArticleTypeHandlerInterface  $addArticleTypeHandler
      */
     public function __construct(
+        FormFactoryInterface $formFactory,
         EventDispatcherInterface $eventDispatcher,
-        FileUploaderHelper $fileUploaderHelper
+        FileUploaderHelper $fileUploaderHelper,
+        AddArticleTypeHandlerInterface $addArticleTypeHandler
     ) {
+        $this->formFactory = $formFactory;
         $this->eventDispatcher = $eventDispatcher;
         $this->fileUploaderHelper = $fileUploaderHelper;
+        $this->addArticleTypeHandler = $addArticleTypeHandler;
     }
 
-    public function __invoke(HomeResponderInterface $responder)
+
+    public function __invoke(Request $request, HomeResponderInterface $responder)
     {
-        // formulaire qui créer un utilisateur.
+        $addArticleType = $this->formFactory->create(AddArticleType::class)
+                                            ->handleRequest($request);
 
-        $user = new User('Toto', 'toto@gmail.com');
+        if ($this->addArticleTypeHandler->handle($addArticleType)) {
+            // ...
+            return $responder(true);
+        }
 
-        $this->eventDispatcher->dispatch(UserCreatedEvent::NAME, new UserCreatedEvent($user));
-
-        var_dump($this->fileUploaderHelper->getImageFolder());
-
-        return $responder();
+        return $responder(false, $addArticleType);
     }
 }

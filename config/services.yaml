@@ -1,6 +1,7 @@
 parameters:
     _locale: "en"
     APP_ENV: "prod"
+    locale: 'en'
 
 services:
     _defaults:

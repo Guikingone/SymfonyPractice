@@ -3,14 +3,9 @@
 {% block title %}Je suis sur l'index{% endblock %}
 
 {% block body %}
-    <h1>Hello World !</h1>
-    {{ form_start(form) }}
-    {{ form_label(form.content) }}
-    {{ form_widget(form.content) }}
-    {{ form_row(form.images) }}
-    <button type="button" id="add_file">Add a new File</button>
-    {{ form_end(form) }}
-{% endblock body %}
+    {% form_theme form 'theme/add_article_type.html.twig' %}
+    {{ form(form) }}
+{% endblock %}
 
 {% block javascripts %}
     <script type="text/javascript">

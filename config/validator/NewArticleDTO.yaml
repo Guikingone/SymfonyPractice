@@ -1,0 +1,7 @@
+App\Domain\DTO\NewArticleDTO:
+    properties:
+        content:
+            - Length:
+                min: 10
+                max: 15
+                groups: ['creation']
