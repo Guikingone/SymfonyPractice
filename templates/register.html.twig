@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Hello world !</p>
+    {% endif %}
+    {{ form_start(form) }}
+    <button type="submit">Soumettre</button>
+    {{ form_end(form) }}
+{% endblock %}

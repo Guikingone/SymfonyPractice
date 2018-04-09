@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
-
 class User
 {
     /**
@@ -25,22 +24,38 @@ class User
     private $email;
 
     /**
+     * @var string
+     */
+    private $password;
+
+    /**
+     * @var int
+     */
+    private $creationDate;
+
+    /**
      * @var array
      */
     private $roles;
 
     /**
-     * User constructor.
-     *
-     * @param string $username
-     * @param string $email
+     * @var string
+     */
+    private $resetPasswordToken;
+
+    /**
+     * {@inheritdoc}
      */
     public function __construct(
         string $username,
-        string $email
+        string $email,
+        string $password,
+        callable $passwordEncoder
     ) {
         $this->username = $username;
         $this->email = $email;
-        $this->roles[] = 'ROLE_USER';
+        $this->password = $passwordEncoder($password, null);
+        $this->roles = ['ROLE_USER', 'ROLE_ADMIN'];
+        $this->creationDate = time();
     }
 }

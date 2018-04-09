@@ -1,0 +1,32 @@
+security:
+    providers:
+        db_provider:
+           entity:
+               class: App\Domain\Models\User
+               property: username
+
+    encoders:
+        App\Domain\Models\User:
+            algorithm: bcrypt
+            cost: 13
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+
+            # activate different ways to authenticate
+
+            # http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    access_control:
+
+    role_hierarchy:
+        ROLE_ADMIN:      [ROLE_ORGANIZER, ROLE_USER]
+        ROLE_SUPERADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
