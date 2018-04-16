@@ -28,4 +28,17 @@ class Article
     {
         $this->content = $content;
     }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content): void
+    {
+        $this->content = $content;
+    }
+
+    public function getArticle()
+    {
+        return $this->content;
+    }
 }

@@ -27,7 +27,7 @@ class HomeResponder implements HomeResponderInterface
         $this->twig = $twig;
     }
 
-    public function __invoke($redirect = false, FormInterface $addArticleType = null)
+    public function __invoke($redirect = false, FormInterface $addArticleType = null): Response
     {
         $redirect
             ? $response = new RedirectResponse('/')

@@ -35,12 +35,4 @@ class ArticleType extends AbstractType
                 'prototype' => true
             ]);
     }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-
-        ]);
-    }
-
 }

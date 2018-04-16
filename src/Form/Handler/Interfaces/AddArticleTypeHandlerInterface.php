@@ -9,7 +9,14 @@
 namespace App\Form\Handler\Interfaces;
 
 
+use Symfony\Component\Form\FormInterface;
+
 interface AddArticleTypeHandlerInterface
 {
-
+    /**
+     * @param FormInterface $form
+     *
+     * @return bool
+     */
+    public function handle(FormInterface $form): bool;
 }

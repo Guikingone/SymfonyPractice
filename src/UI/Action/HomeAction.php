@@ -71,8 +71,7 @@ class HomeAction implements HomeActionInterface
         $this->fileUploaderHelper = $fileUploaderHelper;
         $this->addArticleTypeHandler = $addArticleTypeHandler;
     }
-
-
+    
     public function __invoke(Request $request, HomeResponderInterface $responder)
     {
         $addArticleType = $this->formFactory->create(AddArticleType::class)
