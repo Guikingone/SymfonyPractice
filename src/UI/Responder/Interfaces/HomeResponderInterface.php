@@ -1,15 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: guillaumeloulier
- * Date: 26/03/2018
- * Time: 10:32
- */
+
+declare(strict_types=1);
 
 namespace App\UI\Responder\Interfaces;
 
+use Symfony\Component\Form\FormInterface;
 
 interface HomeResponderInterface
 {
-
+    /**
+     * @param bool $redirect
+     * @param FormInterface $form
+     *
+     * @return mixed
+     */
+    public function __invoke($redirect = false, FormInterface $form = null);
 }

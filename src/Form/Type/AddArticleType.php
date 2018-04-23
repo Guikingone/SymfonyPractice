@@ -13,13 +13,11 @@ namespace App\Form\Type;
 
 use App\Domain\DTO\NewArticleDTO;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 
 class AddArticleType extends AbstractType
 {
@@ -28,7 +26,6 @@ class AddArticleType extends AbstractType
         $builder
             ->add('content', TextareaType::class)
             ->add('title', TextType::class)
-            ->add('image', FileType::class)
         ;
     }
 
@@ -39,8 +36,7 @@ class AddArticleType extends AbstractType
             'empty_data' => function (FormInterface $form) {
                 return new NewArticleDTO(
                     $form->get('content')->getData(),
-                    $form->get('title')->getData(),
-                    $form->get('image')->getData()
+                    $form->get('title')->getData()
                 );
             },
             'validation_groups' => ['creation']

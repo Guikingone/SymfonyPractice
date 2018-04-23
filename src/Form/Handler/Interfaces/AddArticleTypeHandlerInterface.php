@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Created by PhpStorm.
  * User: guillaumeloulier
@@ -7,7 +10,6 @@
  */
 
 namespace App\Form\Handler\Interfaces;
-
 
 use Symfony\Component\Form\FormInterface;
 

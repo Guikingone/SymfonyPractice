@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/**
+ * Class HomeResponder.
+ *
+ * @author Guillaume Loulier <contact@guillaumeloulier.fr>
+ */
 class HomeResponder implements HomeResponderInterface
 {
     /**
@@ -27,6 +32,9 @@ class HomeResponder implements HomeResponderInterface
         $this->twig = $twig;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($redirect = false, FormInterface $addArticleType = null): Response
     {
         $redirect

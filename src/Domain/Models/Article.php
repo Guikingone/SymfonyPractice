@@ -11,13 +11,31 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+
 
 class Article
 {
     /**
+     * @var UuidInterface
+     */
+    private $id;
+
+    /**
+     * @var UuidInterface
+     */
+    private $uuid;
+
+    /**
      * @var string
      */
     private $content;
+
+    /**
+     * @var User
+     */
+    private $author;
 
     /**
      * Article constructor.
@@ -26,6 +44,8 @@ class Article
      */
     public function __construct(string $content)
     {
+        $this->id = Uuid::uuid4();
+        $this->uuid = Uuid::uuid4();
         $this->content = $content;
     }
 
@@ -35,10 +55,5 @@ class Article
     public function setContent($content): void
     {
         $this->content = $content;
-    }
-
-    public function getArticle()
-    {
-        return $this->content;
     }
 }

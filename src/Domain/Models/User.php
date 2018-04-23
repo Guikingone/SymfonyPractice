@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: guillaumeloulier
- * Date: 26/03/2018
- * Time: 11:33
- */
-
 namespace App\Domain\Models;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+
 
 class User
 {
+    /**
+     * @var UuidInterface
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -44,6 +47,11 @@ class User
     private $resetPasswordToken;
 
     /**
+     * @var \ArrayAccess
+     */
+    private $articles;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct(
@@ -52,10 +60,19 @@ class User
         string $password,
         callable $passwordEncoder
     ) {
+        $this->id = Uuid::uuid4();
         $this->username = $username;
         $this->email = $email;
         $this->password = $passwordEncoder($password, null);
         $this->roles = ['ROLE_USER', 'ROLE_ADMIN'];
         $this->creationDate = time();
+
+        $this->articles = new ArrayCollection();
+    }
+
+    public function updateCredentials(string $username, string $email)
+    {
+        $this->username = $username;
+        $this->email = $email;
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Models\Article" table="skeleton_article">
+        <id name="id" type="uuid" />
+        <field name="content" type="string" length="200" unique="false" />
+        <field name="uuid" type="uuid" unique="false" />
+        <many-to-one field="author" target-entity="App\Domain\Models\User" inversed-by="articles" />
+    </entity>
+</doctrine-mapping>

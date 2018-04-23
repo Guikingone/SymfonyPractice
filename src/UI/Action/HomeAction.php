@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace App\UI\Action;
 
-use App\Domain\DTO\NewArticleDTO;
 use App\Form\Handler\Interfaces\AddArticleTypeHandlerInterface;
 use App\Form\Type\AddArticleType;
 use App\Helper\FileUploaderHelper;
@@ -19,7 +18,6 @@ use App\UI\Action\Interfaces\HomeActionInterface;
 use App\UI\Responder\Interfaces\HomeResponderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 

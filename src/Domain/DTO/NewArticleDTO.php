@@ -2,18 +2,24 @@
 
 declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: guillaumeloulier
- * Date: 02/04/2018
- * Time: 11:26
+/*
+ * This file is part of the TOTO project.
+ *
+ * (c) Guillaume Loulier <contact@guillaumeloulier.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Domain\DTO;
 
-
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * Class NewArticleDTO.
+ *
+ * @author
+ */
 class NewArticleDTO
 {
     /**
@@ -21,8 +27,14 @@ class NewArticleDTO
      */
     public $content;
 
+    /**
+     * @var string
+     */
     public $title;
 
+    /**
+     * @var UploadedFile
+     */
     public $image;
 
     /**
@@ -30,7 +42,7 @@ class NewArticleDTO
      *
      * @param string $content
      */
-    public function __construct(string $content, string $title, UploadedFile $image)
+    public function __construct(string $content, string $title, UploadedFile $image = null)
     {
         $this->content = $content;
         $this->title = $title;
