@@ -5,6 +5,9 @@ services:
     php-fpm:
         container_name: ${CONTAINER_NAME}_php-fpm
         build: .
+        environment:
+            BLACKFIRE_SERVER_ID: '${BLACKFIRE_SERVER_ID}'
+            BLACKFIRE_SERVER_TOKEN: '${BLACKFIRE_SERVER_TOKEN}'
         ports:
             - '${PHP_PORT}:9000'
         volumes:
@@ -40,6 +43,22 @@ services:
             - '${POSTGRES_PORT}:5432'
         volumes:
             - 'db-data:/var/lib/postgresql/data:rw'
+        restart: always
+
+    # Performances configuration
+    blackfire:
+        container_name: ${CONTAINER_NAME}_blackfire
+        image: blackfire/blackfire
+        environment:
+            BLACKFIRE_LOG_LEVEL: 4
+            BLACKFIRE_SERVER_ID: '${BLACKFIRE_SERVER_ID}'
+            BLACKFIRE_SERVER_TOKEN: '${BLACKFIRE_SERVER_TOKEN}'
+            BLACKFIRE_CLIENT_ID: '${BLACKFIRE_CLIENT_ID}'
+            BLACKFIRE_CLIENT_TOKEN: '${BLACKFIRE_CLIENT_TOKEN}'
+        links:
+            - php-fpm
+        volumes:
+            - './:${WORKPATH}:rw,cached'
         restart: always
 
 volumes:

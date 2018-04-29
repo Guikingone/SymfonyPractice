@@ -1,1 +1,0 @@
-2018/04/23 10:01:51 [error] 7#7: *18 client intended to send too large body: 2576200 bytes, client: 172.20.0.1, server: , request: "POST / HTTP/1.1", host: "localhost:8085", referrer: "http://localhost:8085/"
