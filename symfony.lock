@@ -17,6 +17,12 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "blackfire/php-sdk": {
+        "version": "v1.13.0"
+    },
+    "composer/ca-bundle": {
+        "version": "1.1.1"
+    },
     "container-interop/container-interop": {
         "version": "1.2.0"
     },

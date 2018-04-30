@@ -17,7 +17,6 @@ class UserCreatedListener
 {
     public function onUserCreated(UserCreatedEvent $event)
     {
-        // envoi d'email
-        dump($event->getUser());
+
     }
 }

@@ -37,13 +37,13 @@ class HomeResponder implements HomeResponderInterface
      */
     public function __invoke($redirect = false, FormInterface $addArticleType = null): Response
     {
-        $redirect
-            ? $response = new RedirectResponse('/')
-            : $response = new Response(
-                $this->twig->render('index.html.twig', [
-                    'form' => $addArticleType->createView()
-                ])
-        );
+        if ($redirect) {
+            $response = new RedirectResponse('/');
+        } else {
+            $response = new Response($this->twig->render('index.html.twig', [
+                'form' => $addArticleType->createView()
+            ]));
+        }
 
         return $response;
     }

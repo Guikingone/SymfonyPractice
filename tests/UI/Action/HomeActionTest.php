@@ -17,6 +17,7 @@ use App\Helper\FileUploaderHelper;
 use App\UI\Action\HomeAction;
 use App\UI\Action\Interfaces\HomeActionInterface;
 use App\UI\Responder\HomeResponder;
+use Blackfire\Bridge\PhpUnit\TestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -28,6 +29,8 @@ use Twig\Environment;
 
 class HomeActionTest extends KernelTestCase
 {
+    use TestCaseTrait;
+
     /**
      * @var AddArticleTypeHandlerInterface
      */
@@ -55,8 +58,8 @@ class HomeActionTest extends KernelTestCase
     {
         static::bootKernel();
 
-        $this->formFactory = static::$kernel->getContainer()->get('form.factory');
-        $this->eventDispatcher = static::$kernel->getContainer()->get('event_dispatcher');
+        $this->formFactory = $this->createMock(FormFactoryInterface::class);
+        $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $this->addArticleTypeHandler = $this->createMock(AddArticleTypeHandlerInterface::class);
 
@@ -80,6 +83,9 @@ class HomeActionTest extends KernelTestCase
         );
     }
 
+    /**
+     * @group Blackfire
+     */
     public function testWrongFormHandling()
     {
         $request = Request::create(
@@ -98,6 +104,12 @@ class HomeActionTest extends KernelTestCase
             $this->fileUploader,
             $this->addArticleTypeHandler
         );
+
+        $probe = static::$blackfire->createProbe();
+
+        $homeAction($request, $responder);
+
+        static::$blackfire->endProbe($probe);
 
         static::assertInstanceOf(
             Response::class,

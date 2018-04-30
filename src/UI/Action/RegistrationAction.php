@@ -91,9 +91,6 @@ class RegistrationAction
                 'ie1FDLTOTO',
                 \Closure::fromCallable([$encoder, 'encodePassword'])
             );
-
-            dump($this->userBuilder->getUser());
-            die();
         }
 
         return new Response(
