@@ -21,6 +21,7 @@ jobs:
                     - vendor
             - run: ./bin/console d:d:c --env=test
             - run: ./bin/console d:s:c --env=test
+            - run: ./bin/console d:f:l --env=test -n
             - run: ./bin/phpunit -v --exclude-group Blackfire
 
 workflows:
