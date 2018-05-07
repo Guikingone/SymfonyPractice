@@ -2,7 +2,7 @@ version: 2
 jobs:
     phpunit:
         docker:
-            - image: circleci/php:7.2.5-apache-stretch-node
+            - image: circleci/php:7.2.4-apache-node-browsers
         steps:
             - checkout
             - run: echo 'Hello World'
