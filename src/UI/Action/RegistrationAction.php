@@ -67,8 +67,13 @@ class RegistrationAction
      * @param UserBuilder $userBuilder
      * @param Environment $twig
      */
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker, EncoderFactoryInterface $encoderFactory, FormFactoryInterface $formFactory, UserBuilder $userBuilder, Environment $twig)
-    {
+    public function __construct(
+        AuthorizationCheckerInterface $authorizationChecker,
+        EncoderFactoryInterface $encoderFactory,
+        FormFactoryInterface $formFactory,
+        UserBuilder $userBuilder,
+        Environment $twig
+    ) {
         $this->authorizationChecker = $authorizationChecker;
         $this->encoderFactory = $encoderFactory;
         $this->formFactory = $formFactory;
