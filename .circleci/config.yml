@@ -6,6 +6,7 @@ jobs:
         steps:
             - checkout
             - run: echo 'Hello World'
+            - run: sudo docker-php-ext-install zip
             - run: sudo composer self-update
             - restore_cache:
                 keys:
@@ -26,4 +27,3 @@ workflows:
     unit_test:
         jobs:
             - phpunit
-            
