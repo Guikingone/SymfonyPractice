@@ -23,7 +23,7 @@ class ArticleTest extends TestCase
 
         static::assertSame(
             'Toto',
-            $article->getArticle()
+            $article->getContent()
         );
     }
 
@@ -33,18 +33,18 @@ class ArticleTest extends TestCase
 
         static::assertSame(
             '',
-            $article->getArticle()
+            $article->getContent()
         );
     }
 
     public function testSetContent()
     {
         $article = new Article('');
-        $article->setContent(35);
+        $article->setContent((string) 35);
 
         static::assertSame(
-            35,
-            $article->getArticle()
+            '35',
+            $article->getContent()
         );
     }
 }

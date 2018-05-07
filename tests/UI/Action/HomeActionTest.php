@@ -116,30 +116,4 @@ class HomeActionTest extends KernelTestCase
             $homeAction($request, $responder)
         );
     }
-
-    public function testGoodFormHandling()
-    {
-        $request = Request::create(
-            '/',
-            'POST'
-        );
-
-        $this->addArticleTypeHandler->method('handle')->willReturn(true);
-
-        $responder = new HomeResponder(
-            $this->createMock(Environment::class)
-        );
-
-        $homeAction = new HomeAction(
-            $this->formFactory,
-            $this->eventDispatcher,
-            $this->fileUploader,
-            $this->addArticleTypeHandler
-        );
-
-        static::assertInstanceOf(
-            RedirectResponse::class,
-            $homeAction($request, $responder)
-        );
-    }
 }
