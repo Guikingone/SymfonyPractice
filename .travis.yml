@@ -1,0 +1,15 @@
+language: php
+php:
+    - '7.2'
+before_script:
+    - composer install --no-scripts -n
+    - cp .env.dist .env
+    - cp .env.behat.dist .env.behat
+    - cp phpunit.xml.dist phpunit.xml
+script:
+    - ./bin/console d:d:c --env=test
+    - ./bin/console d:s:c --env=test
+    - ./bin/console d:f:l -n --env=test
+    - vendor/bin/phpunit -v --exclude-group Blackfire
+notifications:
+    email: false
