@@ -21,6 +21,7 @@ use Blackfire\Bridge\PhpUnit\TestCaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,6 +114,37 @@ class HomeActionTest extends KernelTestCase
 
         static::assertInstanceOf(
             Response::class,
+            $homeAction($request, $responder)
+        );
+    }
+
+    public function testGoodFormHandling()
+    {
+        $formInterface = $this->createMock(FormInterface::class);
+
+        $this->formFactory->method('create')->willReturn($formInterface);
+        $formInterface->method('handleRequest')->willReturnSelf();
+
+        $request = Request::create(
+            '/',
+            'POST'
+        );
+
+        $this->addArticleTypeHandler->method('handle')->willReturn(true);
+
+        $responder = new HomeResponder(
+            $this->createMock(Environment::class)
+        );
+
+        $homeAction = new HomeAction(
+            $this->formFactory,
+            $this->eventDispatcher,
+            $this->fileUploader,
+            $this->addArticleTypeHandler
+        );
+
+        static::assertInstanceOf(
+            RedirectResponse::class,
             $homeAction($request, $responder)
         );
     }
