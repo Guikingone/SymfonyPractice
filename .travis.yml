@@ -9,6 +9,6 @@ script:
     - ./bin/console d:d:c --env=test
     - ./bin/console d:s:c --env=test
     - ./bin/console d:f:l -n --env=test
-    - vendor/bin/phpunit -v --exclude-group Blackfire
+    - ./bin/phpunit -v --exclude-group Blackfire
 notifications:
     email: false
