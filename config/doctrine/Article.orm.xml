@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="App\Domain\Models\Article" table="skeleton_article">
+    <entity name="App\Domain\Models\Article" table="skeleton_article" repository-class="App\Infra\Doctrine\Repository\ArticleRepository">
         <id name="id" type="uuid" />
         <field name="content" type="string" length="200" unique="false" />
         <field name="uuid" type="uuid" unique="false" />

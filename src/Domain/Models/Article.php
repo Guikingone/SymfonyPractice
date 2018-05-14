@@ -11,11 +11,17 @@ declare(strict_types=1);
 
 namespace App\Domain\Models;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-
-class Article
+/**
+ * Class Article
+ *
+ * @ApiResource()
+ */
+class Article implements \JsonSerializable
 {
     /**
      * @var UuidInterface
@@ -29,6 +35,8 @@ class Article
 
     /**
      * @var string
+     *
+     * @Groups({"content"})
      */
     private $content;
 
@@ -50,6 +58,14 @@ class Article
     }
 
     /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id->toString();
+    }
+
+    /**
      * @param string $content
      */
     public function setContent($content): void
@@ -63,5 +79,25 @@ class Article
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            '@id' => $this->id,
+            '@content' => $this->content,
+            'type' => 'Article',
+            '_links' => [
+                'self' => [
+                    'href' => '/api/article/'. $this->id->toString()
+                ],
+                'delete' => [
+                    'href' => '/api/article/'. $this->id->toString()
+                ],
+                'put' => [
+                    'href' => '/api/article/'.$this->id->toString()
+                ]
+            ]
+        ];
     }
 }

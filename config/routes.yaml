@@ -1,1 +1,3 @@
-
+#api_article:
+#    path:    /api/article
+#    controller: App\UI\Action\API

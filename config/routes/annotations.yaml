@@ -1,3 +1,7 @@
 controllers:
     resource: ../../src/UI/Action/
     type: annotation
+
+api:
+    resource: ../../src/UI/Action/API/
+    type: annotation

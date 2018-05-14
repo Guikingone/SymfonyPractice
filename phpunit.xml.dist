@@ -20,6 +20,10 @@
         <env name="MAILER_ADDRESS" value="toto@gmail.com" />
 
         <env name="DATABASE_URL_TEST" value="sqlite:///%kernel.project_dir%/var/data.db" />
+
+        <!-- ###+ nelmio/cors-bundle ### -->
+        <env name="CORS_ALLOW_ORIGIN" value="^https?://localhost:?[0-9]*$"/>
+        <!-- ###- nelmio/cors-bundle ### -->
     </php>
 
     <testsuites>
